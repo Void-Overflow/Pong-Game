@@ -13,9 +13,9 @@ player::~player()
 void player::MovePlayer(bool direction) 
 {
 	if (direction == false)  //up
-		changeInY -= 74;
+		changeInY -= 25;
 	else //down
-		changeInY += 74;
+		changeInY += 25;
 
 	if (changeInY < 0)
 		changeInY = 0;
@@ -25,6 +25,7 @@ void player::MovePlayer(bool direction)
 
 void player::ShowPlayer()
 {
+	int ArrIndex = 0;
 	for (int y = 1 + changeInY; y <= 74 + changeInY; y++) {
 		if (position == false) { //player 1
 			for (int x = 1; x <= 10; x++)
@@ -35,5 +36,14 @@ void player::ShowPlayer()
 			for (int x = 950; x <= 960; x++)
 				SetPixel(mydc, x, y, RGB(255, 255, 255));
 		}
+		OuterCoordinates[ArrIndex] = y;
+		ArrIndex++;
 	}
+}
+
+void player::ResetPlayer()
+{
+	changeInY = 222;
+	for (int i = 0; i < 74; i++)
+		OuterCoordinates[i] = 0;
 }

@@ -1,6 +1,6 @@
-#include<iostream>
 #include "player.h"
-
+#include "ball.h"
+#include <iostream>
 int main(){
     HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_CURSOR_INFO     cursorInfo;
@@ -10,6 +10,8 @@ int main(){
     
     player player1(false);
     player player2(true);
+
+    ball ballobj;
 
     while (true) {
         if (GetAsyncKeyState(0x57))
@@ -21,14 +23,21 @@ int main(){
             player2.MovePlayer(false);
         else if (GetAsyncKeyState(VK_DOWN))
             player2.MovePlayer(true);
-
         player1.ShowPlayer();
         player2.ShowPlayer();
-        Sleep(50);
+
+        ballobj.MoveBall();
+        if(ballobj.ballDirection == false)
+            ballobj.ShowBall(player1.OuterCoordinates);
+        else
+            ballobj.ShowBall(player2.OuterCoordinates);
+
+        if (ballobj.gameOver == true) {
+            player1.ResetPlayer();
+            player2.ResetPlayer();
+            ballobj.gameOver = false;
+        }
         system("cls");
     }
-
-    
-    std::cin.ignore();
     return 0;
 }
