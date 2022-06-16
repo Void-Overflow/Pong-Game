@@ -13,9 +13,9 @@ player::~player()
 void player::MovePlayer(bool direction) 
 {
 	if (direction == false)  //up
-		changeInY -= 25;
+		changeInY -= 30;
 	else //down
-		changeInY += 25;
+		changeInY += 30;
 
 	if (changeInY < 0)
 		changeInY = 0;
@@ -43,7 +43,7 @@ void player::ShowPlayer()
 
 void player::ResetPlayer()
 {
-	changeInY = 222;
+	changeInY = 200;
 	for (int i = 0; i < 74; i++)
 		OuterCoordinates[i] = 0;
 }

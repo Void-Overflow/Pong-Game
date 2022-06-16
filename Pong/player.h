@@ -7,7 +7,7 @@ class player
 {
 private:
 	bool position; 
-	int changeInY = 222;
+	int changeInY = 200;
 
 	HWND myconsole = GetConsoleWindow();
 	HDC mydc = GetDC(myconsole);

@@ -1,6 +1,7 @@
 #include "player.h"
 #include "ball.h"
-#include <iostream>
+#include "logistics.h"
+
 int main(){
     HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_CURSOR_INFO     cursorInfo;
@@ -12,6 +13,7 @@ int main(){
     player player2(true);
 
     ball ballobj;
+    logistics data;
 
     while (true) {
         if (GetAsyncKeyState(0x57))
@@ -35,8 +37,12 @@ int main(){
         if (ballobj.gameOver == true) {
             player1.ResetPlayer();
             player2.ResetPlayer();
+            data.updateScore((ballobj.ballDirection) ? false : true);
             ballobj.gameOver = false;
         }
+
+        data.drawTable();
+        data.showScore();
         system("cls");
     }
     return 0;

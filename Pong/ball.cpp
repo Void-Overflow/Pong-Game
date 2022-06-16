@@ -1,5 +1,5 @@
 #include "ball.h"
-#include <iostream>
+
 void ball::ShowBall(int PlayerOuterlayerCoordinates[74])
 {
 	int xShift[2] = { 0, 0 }; //Beginning, Ending
@@ -12,20 +12,20 @@ void ball::ShowBall(int PlayerOuterlayerCoordinates[74])
 		else if (y >= 465)
 			yIncrementAmt--;
 
-		for (int x = 500 + xShift[0] + changeInX; x <= 502 + xShift[1] + changeInX; x++) {
+		for (int x = 470 + xShift[0] + changeInX; x <= 472 + xShift[1] + changeInX; x++) {
 			SetPixel(mydc, x, y, RGB(255, 255, 255));
 
 			for (int i = 0; i < 74; i++) {
 				if (y == PlayerOuterlayerCoordinates[i] && (x == 10 || x == 950)) {  //Collision detection
 					if (i <= 38) {
-						yIncrementAmt -= 10;
+						yIncrementAmt -= 12;
 						if(yIncrementAmt == 0)
-							yIncrementAmt -= 10;
+							yIncrementAmt -= 12;
 					}
 					if (i <= 74 && i > 38) {
-						yIncrementAmt += 10;
+						yIncrementAmt += 12;
 						if (yIncrementAmt == 0)
-							yIncrementAmt += 10;
+							yIncrementAmt += 12;
 					}
 
 					ballDirection = !ballDirection;
@@ -34,7 +34,6 @@ void ball::ShowBall(int PlayerOuterlayerCoordinates[74])
 			}
 
 			if (x <= -2 || x >= 962) { //ball goes outside of x-bound border
-				std::cout << "GAME OVER";
 				changeInX = 0;
 				changeInY = 0;
 				yIncrementAmt = 0;
@@ -42,7 +41,7 @@ void ball::ShowBall(int PlayerOuterlayerCoordinates[74])
 				xShift[1] = 0;
 
 				gameOver = true;
-				Sleep(1000);
+				//Sleep(1000);
 			}
 		}
 		
@@ -62,8 +61,8 @@ void ball::ShowBall(int PlayerOuterlayerCoordinates[74])
 void ball::MoveBall()
 {
 	if (ballDirection == false) 
-		changeInX -= 10;
+		changeInX -= 12;
 	else 
-		changeInX += 10;
+		changeInX += 12;
 }
 
